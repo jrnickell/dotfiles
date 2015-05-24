@@ -8,7 +8,7 @@ use Symfony\Component\Finder\Finder;
 /**
  * RoboFile is the task runner for this project
  *
- * @copyright Copyright (c) 2015, Novuso. <http://novuso.com>
+ * @copyright Copyright (c) 2015, John Nickell.
  * @license   http://opensource.org/licenses/MIT The MIT License
  * @author    John Nickell <https://johnnickell.com>
  */

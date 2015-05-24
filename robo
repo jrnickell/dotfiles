@@ -1,5 +1,12 @@
 #!/usr/bin/env php
 <?php
+/**
+ * This file is part of dotfiles
+ *
+ * @copyright Copyright (c) 2015, John Nickell.
+ * @license   http://opensource.org/licenses/MIT The MIT License
+ * @author    John Nickell <https://johnnickell.com>
+ */
 
 $paths = require __DIR__.'/paths.php';
 $autoloader = $paths['vendor'].'/autoload.php';
