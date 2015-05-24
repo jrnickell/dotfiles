@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+$paths = require __DIR__.'/paths.php';
+$autoloader = $paths['vendor'].'/autoload.php';
+
+chdir(__DIR__);
+
+if (!file_exists($autoloader)) {
+    $composer = exec('which composer');
+    if ($composer) {
+        $command = '%s install --prefer-dist';
+        passthru(sprintf($command, $composer));
+    } else {
+        $error = [
+            'printf "\r\033[2K  [\033[0;31mFAIL\033[0m] ',
+            'Composer install required; ',
+            'missing \033[0;33m%s\033[0m\n"'
+        ];
+        passthru(sprintf(implode('', $error), $autoloader));
+        exit(1);
+    }
+}
+
+$robo = $paths['vendor'].'/bin/robo';
+
+require $robo;

@@ -1,0 +1,11 @@
+{
+    "name": "jrnickell/dotfiles",
+    "description": "My dotfiles manager for Ubuntu",
+    "require": {
+        "php": ">=5.4",
+        "codegyre/robo": "~0.5",
+        "symfony/console": "~2.6",
+        "symfony/finder": "~2.6",
+        "symfony/filesystem": "~2.6"
+    }
+}

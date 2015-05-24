@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+DOTFILES_DIR="$(dirname "${BASH_SOURCE}")"
+
+git pull origin master
+
+php $DOTFILES_DIR/robo sync

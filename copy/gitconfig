@@ -1,0 +1,49 @@
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
+    attributesfile = ~/.gitattributes
+
+[color]
+    ui = true
+
+[push]
+    default = simple
+
+[alias]
+    new = flow init --showcommands
+    flist = flow feature list
+    fstart = flow feature start
+    fdone = flow feature finish
+    fpub = flow feature publish
+    fpull = flow feature pull
+    fdiff = flow feature diff
+    ftrack = flow feature track
+    fbase = flow feature rebase
+    fco = flow feature checkout
+    fdel = flow feature delete
+    rlist = flow release list
+    rstart = flow release start
+    rdone = flow release finish
+    rpub = flow release publish
+    rtrack = flow release track
+    rdel = flow release delete
+    hlist = flow hotfix list
+    hstart = flow hotfix start
+    hdone = flow hotfix finish
+    hpub = flow hotfix publish
+    hdel = flow hotfix delete
+    slist = flow support list
+    sstart = flow support start
+    fconf = flow config
+    ptag = push --tags
+    pdev = push origin develop
+    udev = pull origin develop
+    stat = status -sb
+    co = checkout
+    ec = config --global -e
+    cm = !git add -A && git commit -m
+    save = !git add -A && git commit -m 'SAVEPOINT'
+    wip = !git add -u && git commit -m 'WIP'
+    undo = reset HEAD~1 --mixed
+    amend = commit -a --amend
+    alias = !git config --get-regexp ^alias | sed -e 's/^alias.//' -e 's/\\ /\\ =\\ /' | less

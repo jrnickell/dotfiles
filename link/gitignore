@@ -1,0 +1,29 @@
+# Linux
+*~
+.directory
+.Trash-*
+
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+sftp-config.json
+
+# Vim
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+# Composer
+composer.phar
+
+# Vagrant
+.vagrant/
+
+# Sass
+.sass-cache
+*.css.map

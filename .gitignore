@@ -1,2 +1,7 @@
+/backup/
+/link/vim/bundle/
+/vendor/
+/composer.phar
+/composer.lock
 /*.sublime-project
 /*.sublime-workspace
