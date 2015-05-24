@@ -1,7 +1,6 @@
 <?php
 
 use Robo\Tasks;
-use Robo\Result;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
