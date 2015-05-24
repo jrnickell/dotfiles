@@ -39,7 +39,7 @@ class RoboFile extends Tasks
         if (!$force) {
             $question = 'This may overwrite existing files in your home directory. Are you sure?';
             if (!$this->confirm($question)) {
-                $this->say('sync cancelled');
+                $this->info('sync cancelled');
 
                 return;
             }
