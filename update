@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # save dotfiles root directory
-DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # change to dotfiles root
-cd $DOTFILES_DIR
+cd $DOTFILES
 
 # fetch updated remote refs
 git remote update
@@ -26,4 +26,7 @@ else
 fi
 
 # run the sync command
-php $DOTFILES_DIR/robo sync
+php $DOTFILES/robo sync
+
+# source profile
+source ~/.profile
