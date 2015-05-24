@@ -173,7 +173,7 @@
 
 " Syntax Check {{{
     " shows syntax higlighting groups under cursor
-    nmap <C-S-H> :call <SID>SynStack()<CR>
+    nmap <C-S-h> :call <SID>SynStack()<CR>
     function! <SID>SynStack()
         if !exists("*synstack")
             return
@@ -203,13 +203,28 @@
 
 " Mapping Shortcuts {{{
     " set leader character
-    let mapleader=","
+    let mapleader = ","
+    let g:mapleader = ","
     " semicolon start commands without shift
     nnoremap ; :
     " space key toggles folds open/closed
     nnoremap <space> za
     " leader-space turns off search highlight
-    nnoremap <leader><space> :noh1search<CR>
+    nnoremap <leader><space> :noh1search<cr>
+    " save via ',w'
+    nmap <leader>w :w!<cr>
+    " exit insert mode via 'jj'
+    imap jj <esc>
+    " ctrl-n for nerdtree
+    " ctrl-ww to switch between nerdtree and panes
+    map <C-n> :NERDTreeToggle<cr>
+" }}}
+
+" Syntax Specific {{{
+    " remove trailing whitespace in PHP files
+    autocmd BufWritePre *.php :%s/\s\+$//e
+    " makefiles need to use tabs
+    autocmd FileType make setlocal noexpandtab
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
