@@ -51,62 +51,8 @@ class RoboFile extends Tasks
     }
 
     //===================================================//
-    // Helper Methods                                    //
+    // Sub-commands                                      //
     //===================================================//
-
-    /**
-     * Prints text with info color
-     *
-     * @param string $message The message
-     */
-    private function info($message)
-    {
-        $this->say(sprintf('<fg=blue>%s</fg=blue>', $message));
-    }
-
-    /**
-     * Retrieves application paths
-     *
-     * @return array
-     */
-    private function getPaths()
-    {
-        if ($this->paths === null) {
-            $this->paths = require __DIR__.'/paths.php';
-        }
-
-        return $this->paths;
-    }
-
-    /**
-     * Retrieves copy paths
-     *
-     * @return Traversable
-     */
-    private function findCopyPaths()
-    {
-        $paths = $this->getPaths();
-        $iterator = Finder::create()
-            ->depth(0)
-            ->in($paths['copy']);
-
-        return $iterator;
-    }
-
-    /**
-     * Retrieves link paths
-     *
-     * @return Traversable
-     */
-    private function findLinkPaths()
-    {
-        $paths = $this->getPaths();
-        $iterator = Finder::create()
-            ->depth(0)
-            ->in($paths['link']);
-
-        return $iterator;
-    }
 
     /**
      * Updates symlinks
@@ -156,6 +102,68 @@ class RoboFile extends Tasks
                 $this->say(sprintf('%s copied to %s', $origin, $destination));
             }
         }
+    }
+
+    //===================================================//
+    // Finder Methods                                    //
+    //===================================================//
+
+    /**
+     * Retrieves copy paths
+     *
+     * @return Traversable
+     */
+    private function findCopyPaths()
+    {
+        $paths = $this->getPaths();
+        $iterator = Finder::create()
+            ->depth(0)
+            ->in($paths['copy']);
+
+        return $iterator;
+    }
+
+    /**
+     * Retrieves link paths
+     *
+     * @return Traversable
+     */
+    private function findLinkPaths()
+    {
+        $paths = $this->getPaths();
+        $iterator = Finder::create()
+            ->depth(0)
+            ->in($paths['link']);
+
+        return $iterator;
+    }
+
+    //===================================================//
+    // Helper Methods                                    //
+    //===================================================//
+
+    /**
+     * Prints text with info color
+     *
+     * @param string $message The message
+     */
+    private function info($message)
+    {
+        $this->say(sprintf('<fg=blue>%s</fg=blue>', $message));
+    }
+
+    /**
+     * Retrieves application paths
+     *
+     * @return array
+     */
+    private function getPaths()
+    {
+        if ($this->paths === null) {
+            $this->paths = require __DIR__.'/paths.php';
+        }
+
+        return $this->paths;
     }
 
     /**
