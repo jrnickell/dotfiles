@@ -46,9 +46,6 @@
     " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
     Plugin 'kien/ctrlp.vim'
 
-    " php updated syntax support
-    " Plugin 'StanAngeloff/php.vim'
-
     " JSON file detection and support
     Plugin 'leshill/vim-json'
 
