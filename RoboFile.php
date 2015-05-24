@@ -113,7 +113,6 @@ class RoboFile extends Tasks
         $this->stopOnFail(true);
         foreach ($this->findScripts() as $script) {
             $path = $script->getRealpath();
-            $this->say(sprintf('running "bash %s"', $path));
             $this->taskExec('bash')
                 ->arg($path)
                 ->printed(true)
