@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
-DOTFILES_DIR="$(dirname "${BASH_SOURCE}")"
+# save dotfiles root directory
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# change to dotfiles root
+cd $DOTFILES_DIR
+
+# update repo
 git pull origin master
 
+# run the sync command
 php $DOTFILES_DIR/robo sync
