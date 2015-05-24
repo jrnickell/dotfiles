@@ -45,10 +45,25 @@ class RoboFile extends Tasks
             }
         }
         $this->info('starting sync');
+        $this->clearBackup();
         $this->updateLinks();
         $this->updateCopies();
         $this->runScripts();
         $this->info('sync complete');
+    }
+
+    //===================================================//
+    // Clear Targets                                     //
+    //===================================================//
+
+    /**
+     * Clears the previous backup
+     */
+    public function clearBackup()
+    {
+        $fs = new Filesystem();
+        $paths = $this->getPaths();
+        $fs->remove($paths['backup']);
     }
 
     //===================================================//
