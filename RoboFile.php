@@ -17,9 +17,20 @@ class RoboFile extends Tasks
     /**
      * Application paths
      *
+     * Access with getPaths()
+     *
      * @var array
      */
     private $paths;
+
+    /**
+     * Filesystem
+     *
+     * Access with getFilesystem()
+     *
+     * @var Filesystem
+     */
+    private $filesystem;
 
     //===================================================//
     // Main Targets                                      //
@@ -35,10 +46,10 @@ class RoboFile extends Tasks
     public function sync(array $opts = ['force' => false])
     {
         $force = isset($opts['force']) && $opts['force'] ? true : false;
+        $this->stopOnFail(true);
         $this->yell('sync');
         if (!$force) {
-            $question = 'This may overwrite existing files in your home directory. Are you sure?';
-            if (!$this->confirm($question)) {
+            if (!$this->confirm('This will overwrite files in your home directory. Are you sure?')) {
                 $this->info('sync cancelled');
 
                 return;
@@ -61,9 +72,13 @@ class RoboFile extends Tasks
      */
     public function clearBackup()
     {
-        $fs = new Filesystem();
+        $fs = $this->getFilesystem();
         $paths = $this->getPaths();
+        $this->stopOnFail(true);
+        $this->yell('clear:backup');
+        $this->info('removing backup directory');
         $fs->remove($paths['backup']);
+        $this->info('backup directory removed');
     }
 
     //===================================================//
@@ -75,7 +90,7 @@ class RoboFile extends Tasks
      */
     private function updateLinks()
     {
-        $fs = new Filesystem();
+        $fs = $this->getFilesystem();
         $paths = $this->getPaths();
         foreach ($this->findLinkPaths() as $link) {
             $dotname = sprintf('.%s', $link->getBasename());
@@ -100,7 +115,7 @@ class RoboFile extends Tasks
      */
     private function updateCopies()
     {
-        $fs = new Filesystem();
+        $fs = $this->getFilesystem();
         $paths = $this->getPaths();
         foreach ($this->findCopyPaths() as $copy) {
             $dotname = sprintf('.%s', $copy->getBasename());
@@ -125,7 +140,6 @@ class RoboFile extends Tasks
      */
     private function runScripts()
     {
-        $this->stopOnFail(true);
         foreach ($this->findScripts() as $script) {
             $path = $script->getRealpath();
             $this->taskExec('bash')
@@ -215,6 +229,20 @@ class RoboFile extends Tasks
     }
 
     /**
+     * Retrieves filesystem helper
+     *
+     * @return Filesystem
+     */
+    private function getFilesystem()
+    {
+        if ($this->filesystem === null) {
+            $this->filesystem = new Filesystem();
+        }
+
+        return $this->filesystem;
+    }
+
+    /**
      * Copies a file or directory
      *
      * @param  string $origin      The origin path
@@ -222,7 +250,7 @@ class RoboFile extends Tasks
      */
     private function copy($origin, $destination)
     {
-        $fs = new Filesystem();
+        $fs = $this->getFilesystem();
         if (is_dir($origin)) {
             $fs->mirror($origin, $destination, null, true);
         } else {
