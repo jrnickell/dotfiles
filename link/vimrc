@@ -1,0 +1,218 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Help
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Plugins {{{
+    " required settings
+    set nocompatible
+    filetype off
+
+    " set the runtime path to include vundle and initialize
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+
+    " let vundle manage vundle
+    Plugin 'gmarik/Vundle.vim'
+
+    " True Sublime Text style multiple selections for Vim
+    Plugin 'terryma/vim-multiple-cursors'
+
+    " EasyMotion provides a much simpler way to use some motions in vim
+    Plugin 'Lokaltog/vim-easymotion'
+
+    " The NERD tree allows you to explore your filesystem and to open files and directories
+    Plugin 'scrooloose/nerdtree'
+
+    " emmet-vim provides support for expanding abbreviations similar to emmet
+    Plugin 'mattn/emmet-vim'
+
+    " snipMate.vim implements some of TextMate's snippets features in Vim
+    Plugin 'msanders/snipmate.vim'
+
+    " Surround.vim provides mappings to delete, change and add: parentheses, brackets, XML tags, and more
+    Plugin 'tpope/vim-surround'
+
+    " Syntastic is a syntax checking plugin for Vim
+    Plugin 'scrooloose/syntastic'
+
+    " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
+    Plugin 'kien/ctrlp.vim'
+
+    " php updated syntax support
+    " Plugin 'StanAngeloff/php.vim'
+
+    " JSON file detection and support
+    Plugin 'leshill/vim-json'
+
+    " JavaScript indent support
+    Plugin 'pangloss/vim-javascript'
+
+    " HTML indent support
+    Plugin 'indenthtml.vim'
+
+    " Markdown support
+    Plugin 'tpope/vim-markdown'
+
+    " Haml and Sass support
+    Plugin 'tpope/vim-haml'
+
+    " Twig support
+    Plugin 'evidens/vim-twig'
+
+    call vundle#end()
+ " }}}
+
+" General Settings {{{
+    " enables file type detection
+    " enables loading plugin files for specific file types
+    " enables loading indent files for specific file types
+    filetype plugin indent on
+    " enables variable settings for individual files
+    set modeline
+    " sets the number of lines checked for set commands; requires modeline
+    set modelines=1
+    " sets the number of lines that are remembered in history
+    set history=1000
+    " sets the number of levels available for undo
+    set undolevels=1000
+    " set the character encoding used
+    set encoding=utf8
+" }}}
+
+" Colors {{{
+    set t_Co=256
+    " enables syntax highlighting
+    syntax enable
+    " sets the background
+    set background=dark
+    " sets the color scheme
+    try
+        colorscheme johnny5c
+    catch
+    endtry
+" }}}
+
+" User Interface {{{
+    " enables changing the window title if supported
+    set title
+    " enables line number display
+    set number
+    " enables display for the line and column number at the cursor
+    set ruler
+    " disables wrapping long lines
+    set nowrap
+    " enables command-line completion menu
+    set wildmenu
+    " does not underline the current line
+    set nocursorline
+    " shows (partial) command in bottom bar
+    set showcmd
+    " shows the current mode in bottom bar
+    set showmode
+    " do not highlight matching brackets and paranthesis
+    set noshowmatch
+" }}}
+
+" Tabs & Spaces {{{
+    " sets the number of visual spaces a tab counts as
+    set tabstop=4
+    " sets the number of spaces a tabs counts as when editing
+    set softtabstop=4
+    " set the number of spaces to use for autoindenting
+    set shiftwidth=4
+    " inserts tabs on the start of a line according to shiftwidth
+    set smarttab
+    " expands tabs to spaces by default
+    set expandtab
+    " uses multiples of shiftwidth when indenting with '<' and '>'
+    set shiftround
+    " autoindent new lines by default
+    set autoindent
+    " copy the previous indentation on autoindent
+    set copyindent
+    " attempts to do smart autoindenting when starting a new line
+    set smartindent
+    " disables automatic C program indenting
+    set nocindent
+" }}}
+
+" Folding {{{
+    " enables folding by default
+    set foldenable
+    " sets foldlevel when starting to edit another buffer in a window
+    set foldlevelstart=0
+    " sets the maximum nesting of folds for the 'indent' and 'syntax' methods
+    set foldnestmax=10
+    " sets the kind of folding to use by default
+    set foldmethod=marker
+" }}}
+
+" Editor Behaviors {{{
+    " allows backspacing over everything
+    set backspace=indent,eol,start
+    " use visual bell instead of beeping
+    set visualbell
+    " do not ring the bell for error messages
+    set noerrorbells
+    " prevents redraw while executing macros
+    set lazyredraw
+    " search as characters are entered
+    set incsearch
+    " highlight search matches
+    set hlsearch
+    " ignore case when searching
+    set ignorecase
+    " overrides ignorecase if search pattern contains upper case
+    set smartcase
+" }}}
+
+" Syntax Check {{{
+    " shows syntax higlighting groups under cursor
+    nmap <C-S-H> :call <SID>SynStack()<CR>
+    function! <SID>SynStack()
+        if !exists("*synstack")
+            return
+        endif
+        echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    endfunc
+" }}}
+
+" Buffer & Backup {{{
+    " hides abandoned buffers instead of unloading
+    set hidden
+    " controls the behavior when switching between buffers
+    " possible values: useopen, usetab, split, newtab; default ("")
+    set switchbuf=useopen
+    " do not keep backup files
+    set nobackup
+    " create intermediate swap files
+    set swapfile
+    " make a backup before overwriting a file, which is removed after the file is
+    " successfully written unless the backup option is on
+    set writebackup
+    " sets the location of the backup directory
+    set backupdir=~/.vim/backup//
+    " sets the location of the swap directory
+    set directory=~/.vim/swap//
+" }}}
+
+" Mapping Shortcuts {{{
+    " set leader character
+    let mapleader=","
+    " semicolon start commands without shift
+    nnoremap ; :
+    " space key toggles folds open/closed
+    nnoremap <space> za
+    " leader-space turns off search highlight
+    nnoremap <leader><space> :noh1search<CR>
+" }}}
+
+" vim:foldmethod=marker:foldlevel=0
