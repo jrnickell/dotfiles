@@ -14,15 +14,16 @@ LOCAL_ID=$(git rev-parse HEAD)
 REMOTE_ID=$(git rev-parse @{u})
 BASE_ID=$(git merge-base HEAD @{u})
 
-# git pull and run sync if remote is newest
+# sync local with remote
 if [ $LOCAL_ID = $REMOTE_ID ]; then
     echo "Local repository is synced with remote"
 elif [ $LOCAL_ID = $BASE_ID ]; then
     git pull origin master
-    # run the sync command
-    php $DOTFILES_DIR/robo sync
 elif [ $REMOTE_ID = $BASE_ID ]; then
     git push origin master
 else
     echo "Local repository and remote are diverged"
 fi
+
+# run the sync command
+php $DOTFILES_DIR/robo sync
