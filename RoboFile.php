@@ -165,7 +165,8 @@ class RoboFile extends Tasks
         $iterator = Finder::create()
             ->files()
             ->name('*.sh')
-            ->in($paths['script']);
+            ->in($paths['script'])
+            ->sortByName();
 
         return $iterator;
     }
