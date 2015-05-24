@@ -16,5 +16,6 @@ return [
     'copy'   => $root_dir.'/copy',
     'home'   => $home_dir,
     'link'   => $root_dir.'/link',
+    'script' => $root_dir.'/script',
     'vendor' => $root_dir.'/vendor'
 ];

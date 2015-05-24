@@ -47,6 +47,7 @@ class RoboFile extends Tasks
         $this->info('starting sync');
         $this->updateLinks();
         $this->updateCopies();
+        $this->runScripts();
         $this->info('sync complete');
     }
 
@@ -65,7 +66,7 @@ class RoboFile extends Tasks
             $dotname = sprintf('.%s', $link->getBasename());
             $origin = $link->getRealpath();
             $destination = sprintf('%s/%s', $paths['home'], $dotname);
-            $backup = sprintf('%s/%s', $paths['backup'], $link->getBasename());
+            $backup = sprintf('%s/%s', $paths['backup'], $dotname);
             if ($fs->exists($destination)) {
                 $this->copy($destination, $backup);
                 $this->say(sprintf('backup %s created', $backup));
@@ -90,7 +91,7 @@ class RoboFile extends Tasks
             $dotname = sprintf('.%s', $copy->getBasename());
             $origin = $copy->getRealpath();
             $destination = sprintf('%s/%s', $paths['home'], $dotname);
-            $backup = sprintf('%s/%s', $paths['backup'], $copy->getBasename());
+            $backup = sprintf('%s/%s', $paths['backup'], $dotname);
             if ($fs->exists($destination)) {
                 $this->copy($destination, $backup);
                 $this->say(sprintf('backup %s created', $backup));
@@ -101,6 +102,22 @@ class RoboFile extends Tasks
                 $this->copy($origin, $destination);
                 $this->say(sprintf('%s copied to %s', $origin, $destination));
             }
+        }
+    }
+
+    /**
+     * Runs scripts
+     */
+    private function runScripts()
+    {
+        $this->stopOnFail(true);
+        foreach ($this->findScripts() as $script) {
+            $path = $script->getRealpath();
+            $this->say(sprintf('running "bash %s"', $path));
+            $this->taskExec('bash')
+                ->arg($path)
+                ->printed(true)
+                ->run();
         }
     }
 
@@ -134,6 +151,22 @@ class RoboFile extends Tasks
         $iterator = Finder::create()
             ->depth(0)
             ->in($paths['link']);
+
+        return $iterator;
+    }
+
+    /**
+     * Retrieves script paths
+     *
+     * @return Traversable
+     */
+    private function findScripts()
+    {
+        $paths = $this->getPaths();
+        $iterator = Finder::create()
+            ->files()
+            ->name('*.sh')
+            ->in($paths['script']);
 
         return $iterator;
     }

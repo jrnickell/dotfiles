@@ -1,5 +1,6 @@
 /backup/
 /link/vim/bundle/
+/script/local.sh
 /vendor/
 /composer.phar
 /composer.lock
