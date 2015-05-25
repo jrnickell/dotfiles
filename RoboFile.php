@@ -165,11 +165,11 @@ class RoboFile extends Tasks
                 $this->copy($destination, $backup);
                 $this->say(sprintf('backup %s created', $backup));
                 $fs->remove($destination);
-                $this->copy($origin, $destination);
-                $this->say(sprintf('%s copied to %s', $origin, $destination));
+                $this->symlink($origin, $destination);
+                $this->say(sprintf('%s linked to %s', $origin, $destination));
             } else {
-                $this->copy($origin, $destination);
-                $this->say(sprintf('%s copied to %s', $origin, $destination));
+                $this->symlink($origin, $destination);
+                $this->say(sprintf('%s linked to %s', $origin, $destination));
             }
         }
     }
