@@ -59,6 +59,7 @@ class RoboFile extends Tasks
         $this->updateLinks();
         $this->updateCopies();
         $this->runScripts();
+        $this->updateSublime();
         $this->info('sync complete');
     }
 
@@ -148,6 +149,31 @@ class RoboFile extends Tasks
         }
     }
 
+    /**
+     * Updates settings for Sublime Text
+     */
+    private function updateSublime()
+    {
+        $fs = $this->getFilesystem();
+        $paths = $this->getPaths();
+        $basePath = $paths['home'].'/.config/sublime-text-3/Packages/User';
+        foreach ($this->findSublime() as $sublime) {
+            $origin = $sublime->getRealpath();
+            $destination = sprintf('%s/%s', $basePath, $sublime->getBasename());
+            $backup = sprintf('%s/sublime/%s', $paths['backup'], $sublime->getBasename());
+            if ($fs->exists($destination)) {
+                $this->copy($destination, $backup);
+                $this->say(sprintf('backup %s created', $backup));
+                $fs->remove($destination);
+                $this->copy($origin, $destination);
+                $this->say(sprintf('%s copied to %s', $origin, $destination));
+            } else {
+                $this->copy($origin, $destination);
+                $this->say(sprintf('%s copied to %s', $origin, $destination));
+            }
+        }
+    }
+
     //===================================================//
     // Finder Methods                                    //
     //===================================================//
@@ -195,6 +221,21 @@ class RoboFile extends Tasks
             ->name('*.sh')
             ->in($paths['script'])
             ->sortByName();
+
+        return $iterator;
+    }
+
+    /**
+     * Retrieves paths for sublime text
+     *
+     * @return Traversable
+     */
+    private function findSublime()
+    {
+        $paths = $this->getPaths();
+        $iterator = Finder::create()
+            ->depth(0)
+            ->in($paths['sublime']);
 
         return $iterator;
     }

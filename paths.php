@@ -11,11 +11,12 @@ $home_dir = getenv('HOME');
 $root_dir = __DIR__;
 
 return [
-    'root'   => $root_dir,
-    'backup' => $root_dir.'/backup',
-    'copy'   => $root_dir.'/copy',
-    'home'   => $home_dir,
-    'link'   => $root_dir.'/link',
-    'script' => $root_dir.'/script',
-    'vendor' => $root_dir.'/vendor'
+    'root'    => $root_dir,
+    'backup'  => $root_dir.'/backup',
+    'copy'    => $root_dir.'/copy',
+    'home'    => $home_dir,
+    'link'    => $root_dir.'/link',
+    'script'  => $root_dir.'/script',
+    'sublime' => $root_dir.'/sublime',
+    'vendor'  => $root_dir.'/vendor'
 ];
