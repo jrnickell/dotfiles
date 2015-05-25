@@ -22,5 +22,6 @@ fi
 if [ -d $BUNDLE_DIR ]; then
     vim +PluginUpdate +qall &>/dev/null
 else
+    git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall &>/dev/null
 fi
