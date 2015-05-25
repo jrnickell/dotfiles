@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# local directory
+DOTFILES_BIN="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# source update script
+source $DOTFILES_BIN/../update

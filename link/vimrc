@@ -22,29 +22,11 @@
     " let vundle manage vundle
     Plugin 'gmarik/Vundle.vim'
 
-    " True Sublime Text style multiple selections for Vim
-    " Plugin 'terryma/vim-multiple-cursors'
-
-    " EasyMotion provides a much simpler way to use some motions in vim
-    " Plugin 'Lokaltog/vim-easymotion'
-
     " The NERD tree allows you to explore your filesystem and to open files and directories
     Plugin 'scrooloose/nerdtree'
 
-    " emmet-vim provides support for expanding abbreviations similar to emmet
-    " Plugin 'mattn/emmet-vim'
-
-    " snipMate.vim implements some of TextMate's snippets features in Vim
-    " Plugin 'msanders/snipmate.vim'
-
-    " Surround.vim provides mappings to delete, change and add: parentheses, brackets, XML tags, and more
-    " Plugin 'tpope/vim-surround'
-
     " Syntastic is a syntax checking plugin for Vim
     Plugin 'scrooloose/syntastic'
-
-    " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
-    " Plugin 'kien/ctrlp.vim'
 
     " JSON file detection and support
     Plugin 'leshill/vim-json'
@@ -63,6 +45,24 @@
 
     " Twig support
     Plugin 'evidens/vim-twig'
+
+    " True Sublime Text style multiple selections for Vim
+    " Plugin 'terryma/vim-multiple-cursors'
+
+    " EasyMotion provides a much simpler way to use some motions in vim
+    " Plugin 'Lokaltog/vim-easymotion'
+
+    " emmet-vim provides support for expanding abbreviations similar to emmet
+    " Plugin 'mattn/emmet-vim'
+
+    " snipMate.vim implements some of TextMate's snippets features in Vim
+    " Plugin 'msanders/snipmate.vim'
+
+    " Surround.vim provides mappings to delete, change and add: parentheses, brackets, XML tags, and more
+    " Plugin 'tpope/vim-surround'
+
+    " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
+    " Plugin 'kien/ctrlp.vim'
 
     call vundle#end()
  " }}}

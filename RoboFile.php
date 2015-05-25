@@ -56,6 +56,7 @@ class RoboFile extends Tasks
         }
         $this->info('starting sync');
         $this->clearBackup();
+        $this->createBinpath();
         $this->updateLinks();
         $this->updateCopies();
         $this->runScripts();
@@ -172,6 +173,24 @@ class RoboFile extends Tasks
                 $this->say(sprintf('%s linked to %s', $origin, $destination));
             }
         }
+    }
+
+    /**
+     * Creates binpath file
+     */
+    private function createBinpath()
+    {
+        $fs = $this->getFilesystem();
+        $paths = $this->getPaths();
+        $root = $paths['root'];
+        $this->say('adding bin directory to PATH');
+        $content = "if [ -d \"$root/bin\" ]; then\n    PATH=\"$root/bin:\$PATH\"\nfi\n";
+        $destination = $paths['home'].'/.binpath';
+        if (!$fs->exists($destination)) {
+            $fs->dumpFile($destination, $content);
+            $fs->chmod($destination, 0644);
+        }
+        $this->say('bin directory added to PATH');
     }
 
     //===================================================//

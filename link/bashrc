@@ -69,7 +69,7 @@ if ! shopt -oq posix; then
 fi
 
 # additional sourcing:
-for file in ~/.{aliases,exports,functions,path,extra}; do
+for file in ~/.{aliases,binpath,exports,functions,path,extra}; do
     [ -r "$file" ] && source "$file"
 done
 unset file
