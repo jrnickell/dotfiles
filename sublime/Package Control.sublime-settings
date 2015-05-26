@@ -1,20 +1,21 @@
 {
-    "in_process_packages":
-    [
-    ],
-    "installed_packages":
-    [
-        "Dayle Rees Color Schemes",
-        "DocBlockr",
-        "EditorConfig",
-        "EJS",
-        "Emmet",
-        "Gradle_Language",
-        "Jade",
-        "Jinja2",
-        "Package Control",
-        "PHP-Twig",
-        "Sass",
-        "Zephir"
-    ]
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"ApplySyntax",
+		"Dayle Rees Color Schemes",
+		"DocBlockr",
+		"EditorConfig",
+		"EJS",
+		"Emmet",
+		"Gradle_Language",
+		"Jade",
+		"Jinja2",
+		"Package Control",
+		"PHP-Twig",
+		"Sass",
+		"Zephir"
+	]
 }
