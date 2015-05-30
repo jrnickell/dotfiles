@@ -1,4 +1,5 @@
 {
+    "jsdocs_per_section_indent": true,
     "jsdocs_return_description": false,
     "jsdocs_spacer_between_sections": true,
     "jsdocs_short_primitives": true,
